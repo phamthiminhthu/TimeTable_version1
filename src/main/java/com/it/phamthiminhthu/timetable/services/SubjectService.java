@@ -82,6 +82,29 @@ public class SubjectService {
         return list;
     }
 
+    //tifm kieems
+
+    public List<SubjectCommon> searchByName(String name){
+        List<Subject> subjects = subjectRepository.findByNameSubject(name);
+        List<Subject> removeSub = new ArrayList<>();
+        for(int i = 0; i < subjects.size() - 1; i++){
+            for(int j = i + 1; j < subjects.size(); j++){
+                if(subjects.get(i).getTenHocPhan().equals(subjects.get(j).getTenHocPhan())){
+                    removeSub.add(subjects.get(j));
+                }
+            }
+        }
+        subjects.removeAll(removeSub);
+        System.out.println(removeSub.size());
+        List<SubjectCommon> subjectCommons = new ArrayList<>();
+        System.out.println(subjects.size());
+        for(int i = 0 ; i < subjects.size(); i++){
+            subjectCommons.add(new SubjectCommon(subjects.get(i).getTenHocPhan(), subjects.get(i).getVien(),
+                    subjects.get(i).getMaHp(), subjects.get(i).getLoaiLop()));
+        }
+        return subjectCommons;
+    }
+
     //danh sach nhung tên lop can hoc -> sắp xếp theo số lượng mã lớp từ bé đến cao
     public List<String> sortListBySoLuongMaLop(List<String> subjects) {
         Map<String, Integer> mapSubject = new HashMap<>();

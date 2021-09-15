@@ -19,9 +19,11 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     @Query("select s from Subject s WHERE s.maLop = ?1")
     List<Subject> findListSubjectByMaLop(int maLop);
 
-
     @Query("select s from Subject s where s.id = ?1")
     Subject findByIdSubject(int id);
+
+    @Query("select s from Subject s where s.tenHocPhan like concat('%', :name, '%') or s.maHp like concat('%', :name, '%') ")
+    List<Subject> findByNameSubject(String name);
 
 
 

@@ -37,9 +37,18 @@
         <div class="list-subject mt-3">
             <h3 class="text-center">List subject</h3>
             <div class="row">
-                <div class="col-12">
+                <div class="col-6">
+                    <nav class="navbar navbar-light bg-light">
+                        <form class="form-inline" th:method="post" th:action="@{/api/v1/list-subject-by-tenHocPhan}" >
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" th:name="content">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </nav>
+                </div>
+                <div class="col-6">
                     <a class="float-right btn btn-primary list-subject-choosen" >Danh sách môn đã chọn( Số lượng đã chọn : <span class="count">0</span>)</a>
                 </div>
+
                 <div class="col-4 mb-3 mt-3" th:each="subject : ${subjectsByTenHocPhanDistinct}">
                     <div class="card">
                         <div class="card-body">
