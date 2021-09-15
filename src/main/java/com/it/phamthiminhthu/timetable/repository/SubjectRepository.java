@@ -19,8 +19,9 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     @Query("select s from Subject s WHERE s.maLop = ?1")
     List<Subject> findListSubjectByMaLop(int maLop);
 
-    @Query("select s from Subject s WHERE s.tenHocPhan not like ?1")
-    List<Subject> findListNoSubjectHasTenHocPhan(String tenHocPhan);
+
+    @Query("select s from Subject s where s.id = ?1")
+    Subject findByIdSubject(int id);
 
 
 

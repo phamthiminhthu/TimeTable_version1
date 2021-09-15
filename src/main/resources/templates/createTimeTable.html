@@ -76,13 +76,13 @@
                     <button type="button" class="btn btn-primary text-center create-timetable-all">CREATE ALL
                         TIMETABLE
                     </button>
-                    <button type="button" class="btn btn-primary text-center my-timetable">CREATE MY TIMETABLE</button>
+                    <button type="button" class="btn btn-primary text-center " id="myTimetable">CREATE MY TIMETABLE
+                    </button>
                 </div>
                 <div class="col-12 mt-3">
                     <!-- create-timetable-all -->
                     <div id="accordion" class="d-none">
                         <!--card1-->
-
                         <div class="card" th:each="timetable, state : ${timetableAll}">
                             <div class="card-header">
                                 <h5 class="mb-0">
@@ -96,7 +96,7 @@
                             <div th:id="${state.index}" class="collapse" aria-labelledby="headingOne"
                                  data-parent="#accordion">
                                 <div class="card-body">
-                                    <table class="table table-dark">
+                                    <table class="table table-dark timeline">
                                         <thead>
                                         <tr>
                                             <th scope="col">Thứ</th>
@@ -114,6 +114,8 @@
                                                     <span th:text="'Mã lớp : ' + ${time.maLop}"></span>
                                                     <br>
                                                     <span th:text="'Thời gian : ' + ${time.thoiGian}"></span>
+                                                    <br>
+                                                    <span th:text="'Thời gian : ' + ${time.buoi}"></span>
                                                 </td>
                                                 <td th:if="${time.thu} == ${i} and ${ #strings.equals(time.buoi, 'chiều')}">
                                                     <span th:text="${time.tenHocPhan}"></span>
@@ -121,6 +123,8 @@
                                                     <span th:text="'Mã lớp : ' + ${time.maLop}"></span>
                                                     <br>
                                                     <span th:text="'Thời gian : ' + ${time.thoiGian}"></span>
+                                                    <br>
+                                                    <span th:text="'Thời gian : ' + ${time.buoi}"></span>
                                                 </td>
                                             </th:block>
 
@@ -128,7 +132,7 @@
 
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn btn-primary">Export</button>
+                                    <button type="button" class="btn btn-primary export">Export</button>
                                 </div>
                             </div>
                         </div>
@@ -148,44 +152,59 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Lập trình cấu trúc</td>
+                            <tr th:each="entry, itemIndex : ${myTimeTable}">
+                                <th scope="row" th:text="${itemIndex.index + 1}">1</th>
+                                <td th:text="${entry.key}"></td>
                                 <td>
                                     <form action="">
                                         <div class="form-group">
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                            <select class="form-control select-option"
+                                                    th:id="'id' + ${itemIndex.index}">
+                                                <option th:each="itemSub : ${entry.value}"
+                                                        th:value="${itemSub.id}">
+                                                    <span th:text="'Mã lớp: '+ ${itemSub.maLop} + '- Mã lớp kèm : ' +
+                                                     ${itemSub.maLopKem} + ' - Thứ : ' + ${itemSub.thu} + ' - Thời gian: '
+                                                     + ${itemSub.thoiGian}"></span>
+                                                </option>
+
                                             </select>
                                         </div>
                                     </form>
                                 </td>
 
                             </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Lập trình cấu trúc</td>
-                                <td>
-                                    <form action="">
-                                        <div class="form-group">
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
+<!--                            <tr>-->
+<!--                                <td><span>Tổng : </span> <span class="total"-->
+<!--                                                               th:text="${#maps.size(myTimeTable)}"></span></td>-->
+<!--                            </tr>-->
 
                             </tbody>
+
                         </table>
+                        <button type="submit" class="text-center btn btn-primary btnMyTimeTable">Create TimeTable
+                        </button>
+                        <div id="thoiKhoaBieu" class="d-none">
+                            <h3>Thời khoá biểu của bạn</h3>
+
+                            <table class="table table-dark">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Thứ</th>
+                                    <th scope="col">Sáng</th>
+                                    <th scope="col">Chiều</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr th:each=" i: ${#numbers.sequence(2, 6)}">
+                                    <th scope="row" th:text="${i}"></th>
+
+
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
 
                     </div>
 

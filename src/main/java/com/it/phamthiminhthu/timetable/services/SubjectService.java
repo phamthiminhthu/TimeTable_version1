@@ -46,10 +46,10 @@ public class SubjectService {
         return list;
     }
 
-    public List<SubjectCommon> getInformationOfSubjectChoosen(List<String> subject){
+    public List<SubjectCommon> getInformationOfSubjectChoosen(List<String> subject) {
         subject = parseList(subject);
         List<SubjectCommon> list = new ArrayList<>();
-        for(int i = 0; i < subject.size(); i++){
+        for (int i = 0; i < subject.size(); i++) {
             List<Subject> subjects = getListSubjectByTenHocPhan(subject.get(i));
             list.add(new SubjectCommon(subject.get(i), subjects.get(0).getVien(), subjects.get(0).getMaHp(), subjects.get(0).getLoaiLop()));
         }
@@ -58,6 +58,28 @@ public class SubjectService {
 
     public List<Subject> getListSubjectByMaLop(int maLop) {
         return subjectRepository.findListSubjectByMaLop(maLop);
+    }
+
+    public Subject findSubjectById(int id) {
+        return subjectRepository.findByIdSubject(id);
+    }
+
+    public List<Subject> myCreateTimeTable(List<String> listId) {
+        List<Integer> newListId = parseIntId(listId);
+        List<Subject> list = new ArrayList<>();
+        for (int i = 0; i < newListId.size(); i++) {
+            list.add(findSubjectById(newListId.get(i)));
+        }
+        return list;
+    }
+
+    public List<Integer> parseIntId(List<String> id) {
+        id = parseList(id);
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < id.size(); i++) {
+            list.add(Integer.parseInt(id.get(i)));
+        }
+        return list;
     }
 
     //danh sach nhung tên lop can hoc -> sắp xếp theo số lượng mã lớp từ bé đến cao
@@ -218,6 +240,7 @@ public class SubjectService {
     public List<List<Subject>> createTimeTable(List<String> subjects) {
         List<List<Subject>> result = new ArrayList<>();
         subjects = sortListBySoLuongMaLop(subjects);
+        if(subjects.size() == 0) return null;
         if (subjects.size() == 1) {
             List<Subject> list = new ArrayList<>();
             list = listSubjectDistinct(subjects.get(0));

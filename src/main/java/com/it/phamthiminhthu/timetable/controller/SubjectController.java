@@ -12,24 +12,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
 @RequestMapping("/api/v1/")
 public class SubjectController {
     private SubjectService subjectService;
+    public static List<Subject> listCreated = new ArrayList<>();
+    public static List<SubjectCommon> result = new ArrayList<>();
+
 
     @Autowired
     public SubjectController(SubjectService subjectService) {
         this.subjectService = subjectService;
     }
 
-    //    @GetMapping("/list-subject-all-timetable")
-//    public String getAll(Model model) {
-//        model.addAttribute("subjects", subjectService.getListSubject());
-//        return "page";
-//    }
     //show toan bo thong tin cua 1 list danh sach
     @GetMapping(value = "/list-subject-by-tenHocPhan")
     public String showListByTenHocPhanDistinct(Model model) {
@@ -49,7 +49,6 @@ public class SubjectController {
 
     }
 
-    public static List<SubjectCommon> result = new ArrayList<>();
 
     // list mon hoc da chon
     @GetMapping(value = "/list-subject-by-tenHocPhan/show-list-subject-choosen", params = {"listSubject"})
@@ -58,18 +57,6 @@ public class SubjectController {
         return new ResponseEntity<List<SubjectCommon>>(subjectService.getInformationOfSubjectChoosen(listSubject), HttpStatus.OK);
     }
 
-    //chuyen huong den tao thoi khoa bieu
-    @GetMapping(value = "/list-subject-by-tenHocPhan/show-list-subject-choosen")
-    public String showListSubjectChoosen(Model model) {
-        model.addAttribute("resultSubject", result);
-        List<String> list = new ArrayList<>();
-        for(int i = 0; i < result.size(); i++){
-            list.add(result.get(i).getTenHocPhan());
-        }
-
-        model.addAttribute("timetableAll", subjectService.createTimeTable(list));
-        return "createTimeTable";
-    }
 
     //delete 1 subject trong list
     @GetMapping(value = "/list-subject-by-tenHocPhan/show-list-subject-choosen", params = {"nameSubject"})
@@ -83,13 +70,32 @@ public class SubjectController {
         return "createTimeTable";
     }
 
+    //chuyen huong den tao thoi khoa bieu
+    @GetMapping(value = "/list-subject-by-tenHocPhan/show-list-subject-choosen")
+    public String showListSubjectChoosen(Model model) {
+        model.addAttribute("resultSubject", result);
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < result.size(); i++) {
+            list.add(result.get(i).getTenHocPhan());
+        }
+        model.addAttribute("timetableAll", subjectService.createTimeTable(list));
+        Map<String, List<Subject>> listSubjectCreated = new HashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            listSubjectCreated.put(list.get(i), subjectService.getListSubjectByTenHocPhan(list.get(i)));
+        }
+        model.addAttribute("myTimeTable", listSubjectCreated);
 
-//    @PostMapping(value = "/list-subject-by-tenHocPhan")
-//    public ResponseEntity<List<List<Subject>>> showTimeTable(@RequestParam(name = "listSubject") List<String> listSubject) {
-//        return new ResponseEntity<List<List<Subject>>>(subjectService.createTimeTable(listSubject), HttpStatus.OK);
-//    }
+        return "createTimeTable";
+    }
 
-    //tạo thời khoá biểu
+
+    //tạo thời khoá biểu cua ban
+
+    @PostMapping(value = "/list-subject-by-tenHocPhan/show-list-subject-choosen", params = {"listId"})
+    public ResponseEntity<List<Subject>> paintTimeTable(@RequestParam(name = "listId") List<String> listId) {
+        listCreated = subjectService.myCreateTimeTable(listId);
+        return new ResponseEntity<List<Subject>>(listCreated, HttpStatus.OK);
+    }
 
 
 }
