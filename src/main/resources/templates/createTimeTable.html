@@ -103,15 +103,15 @@
                                         <thead>
                                         <tr>
                                             <th scope="col">Thứ</th>
-                                            <th scope="col">Sáng</th>
-                                            <th scope="col">Chiều</th>
+                                            <th scope="col"></th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each=" i: ${#numbers.sequence(2, 6)}">
                                             <th scope="row" th:text="${i}"></th>
                                             <th:block th:each="time : ${timetable}">
-                                                <td th:if="${time.thu} == ${i} and ${ #strings.equals(time.buoi, 'sáng')}">
+                                                <td th:if="${time.thu} == ${i}">
                                                     <span th:text="${time.tenHocPhan}"></span>
                                                     <br>
                                                     <span th:text="'Mã lớp : ' + ${time.maLop}"></span>
@@ -120,15 +120,7 @@
                                                     <br>
                                                     <span th:text="'Thời gian : ' + ${time.buoi}"></span>
                                                 </td>
-                                                <td th:if="${time.thu} == ${i} and ${ #strings.equals(time.buoi, 'chiều')}">
-                                                    <span th:text="${time.tenHocPhan}"></span>
-                                                    <br>
-                                                    <span th:text="'Mã lớp : ' + ${time.maLop}"></span>
-                                                    <br>
-                                                    <span th:text="'Thời gian : ' + ${time.thoiGian}"></span>
-                                                    <br>
-                                                    <span th:text="'Thời gian : ' + ${time.buoi}"></span>
-                                                </td>
+
                                             </th:block>
 
                                         </tr>
@@ -192,8 +184,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">Thứ</th>
-                                    <th scope="col">Sáng</th>
-                                    <th scope="col">Chiều</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -201,7 +192,7 @@
                                 <tr th:each=" i: ${#numbers.sequence(2, 6)}">
                                     <th scope="row" th:text="${i}"></th>
                                     <th:block th:each="time : ${listChoose}">
-                                        <td th:if="${time?.thu} == ${i} and ${ #strings.equals(time.buoi, 'sáng')}">
+                                        <td th:if="${time?.thu} == ${i}">
                                             <span th:text="${time?.tenHocPhan}"></span>
                                             <br>
                                             <span th:text="'Mã lớp : ' + ${time?.maLop}"></span>
@@ -210,15 +201,7 @@
                                             <br>
                                             <span th:text="'Thời gian : ' + ${time.buoi}"></span>
                                         </td>
-                                        <td th:if="${time.thu} == ${i} and ${ #strings.equals(time.buoi, 'chiều')}">
-                                            <span th:text="${time.tenHocPhan}"></span>
-                                            <br>
-                                            <span th:text="'Mã lớp : ' + ${time.maLop}"></span>
-                                            <br>
-                                            <span th:text="'Thời gian : ' + ${time.thoiGian}"></span>
-                                            <br>
-                                            <span th:text="'Thời gian : ' + ${time.buoi}"></span>
-                                        </td>
+
                                     </th:block>
 
                                 </tr>

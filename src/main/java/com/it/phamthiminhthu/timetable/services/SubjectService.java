@@ -95,9 +95,7 @@ public class SubjectService {
             }
         }
         subjects.removeAll(removeSub);
-        System.out.println(removeSub.size());
         List<SubjectCommon> subjectCommons = new ArrayList<>();
-        System.out.println(subjects.size());
         for(int i = 0 ; i < subjects.size(); i++){
             subjectCommons.add(new SubjectCommon(subjects.get(i).getTenHocPhan(), subjects.get(i).getVien(),
                     subjects.get(i).getMaHp(), subjects.get(i).getLoaiLop()));
@@ -310,6 +308,14 @@ public class SubjectService {
         }
         return result;
 
+    }
+
+    //sap xep lai thoi gian cua 1 thoi khoa bieu
+    public List<List<Subject>> sapXepTKB(List<List<Subject>> list){
+        for(int i = 0; i < list.size(); i++){
+            Collections.sort(list.get(i), new SortByDateTime());
+        }
+        return list;
     }
 
 

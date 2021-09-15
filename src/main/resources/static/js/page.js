@@ -8,7 +8,6 @@ $(document).ready(function () {
         $('.count').html(count);
         $(this).attr('disabled', 'disabled');
         $(this).siblings('.delete-subject').removeAttr("disabled");
-        console.log(listSubject);
     });
     $('.delete-subject').click(function () {
         var nameSubjectDelete = $(this).siblings('.card-title').text().trim();
@@ -33,12 +32,13 @@ $(document).ready(function () {
                 success: function (response) {
                     location.href = "http://localhost:9000/api/v1/list-subject-by-tenHocPhan/show-list-subject-choosen";
                 }, error: function (xhr) {
-                    console.log("ahihi loi roi");
+
                 }
             });
         }
 
     })
+
 
 
 

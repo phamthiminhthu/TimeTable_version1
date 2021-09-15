@@ -53,7 +53,6 @@ public class SubjectController {
     @PostMapping(value = "/list-subject-by-tenHocPhan", params = {"content"})
     public String searchSubject(@RequestParam(name = "content") String input, Model model){
         List<SubjectCommon> list = subjectService.searchByName(input);
-
         model.addAttribute("subjectsByTenHocPhanDistinct", list);
         return "page";
     }
@@ -87,7 +86,8 @@ public class SubjectController {
         for (int i = 0; i < result.size(); i++) {
             list.add(result.get(i).getTenHocPhan());
         }
-        model.addAttribute("timetableAll", subjectService.createTimeTable(list));
+
+        model.addAttribute("timetableAll",subjectService.sapXepTKB(subjectService.createTimeTable(list)));
 
         Map<String, List<Subject>> listSubjectCreated = new HashMap<>();
         for (int i = 0; i < list.size(); i++) {
@@ -101,11 +101,9 @@ public class SubjectController {
 
 
     //tạo thời khoá biểu cua ban
-
     @GetMapping(value = "/list-subject-by-tenHocPhan/show-list-subject-choosen", params = {"listId"})
     public ResponseEntity<List<Subject>> paintTimeTable(@RequestParam(name = "listId") List<String> listId, Model model) {
         listCreated = subjectService.myCreateTimeTable(listId);
-        model.addAttribute("listChoose", listCreated);
         return new ResponseEntity<List<Subject>>(listCreated, HttpStatus.OK);
     }
 
