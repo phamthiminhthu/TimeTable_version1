@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Index Page</title>
+</head>
+<body>
+<header></header>
+<main>
+    <div class="container">
+        <!-- details-subject -->
+
+        <div class="details-subject">
+            <h3 class="text-center" th:text="${subjectDetail.tenHocPhan}">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" th:text="${subjectDetail.vien}">Viện</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" th:text="${subjectDetail.maHocPhan}">Mã Học Phần</a>
+                    </li>
+                    <li class="nav-item" th:text="${subjectDetail.loaiLop}">
+                        <a class="nav-link" href="#">Loại Lớp</a>
+                    </li>
+
+                </ul>
+            </h3>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Viện</th>
+                            <th scope="col">Mã Lớp</th>
+                            <th scope="col">Mã Lớp Kèm</th>
+                            <th scope="col">Thứ</th>
+                            <th scope="col">Thời gian</th>
+                            <th scope="col">Số buổi</th>
+                            <th scope="col">Phòng</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="subject, state : ${subjectsDetail}">
+                            <th scope="row" th:text="${state.index + 1}">1</th>
+                            <td th:text="${subject.vien}">KCNTT</td>
+                            <td th:text="${subject.maLop}">126801</td>
+                            <td th:text="${subject.maLopKem}">126801</td>
+                            <td th:text="${subject.thu}">2</td>
+                            <td th:text="${subject.thoiGian}">8h25-10h25</td>
+                            <td th:text="${subject.soBuoi}">1</td>
+                            <td th:text="${subject.phong}">D9-501</td>
+                        </tr>
+
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- end-subject-details -->
+
+    </div>
+
+
+</main>
+<footer></footer>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/page.js}"></script>
+</body>
+</html>

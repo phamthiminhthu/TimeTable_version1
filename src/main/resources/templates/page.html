@@ -3,28 +3,75 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>
+
 <head>
     <meta charset="UTF-8"/>
     <title>Index Page</title>
 </head>
 <body>
-<h1> Minh thu</h1>
-<th:block th:each="subject, state : ${subjectsByTenHocPhanDistinct}">
-    <div>
-        <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false" th:text="${subject}" th:attr="data-index = ${state.index + 1}">
-                Name
-            </a>
+<!--<h1> Minh thu</h1>-->
+<!--<th:block th:each="subject, state : ${subjectsByTenHocPhanDistinct}">-->
+<!--    <div>-->
+<!--        <div class="dropdown show">-->
+<!--            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"-->
+<!--               aria-haspopup="true" aria-expanded="false" th:text="${subject}" th:attr="data-index = ${state.index + 1}">-->
+<!--                Name-->
+<!--            </a>-->
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+<!--            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
 
+<!--            </div>-->
+<!--        </div>-->
+<!--        <button class="button-add" th:attr="data-index = ${state.index + 1}">ADD</button>-->
+<!--    </div>-->
+<!--</th:block>-->
+<!--<button class="lenLich">Create Lich</button>-->
+
+<main class="mt-3">
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="container">
+        <!-- list-subject -->
+        <div class="list-subject mt-3">
+            <h3 class="text-center">List subject</h3>
+            <div class="row">
+                <div class="col-12">
+                    <a class="float-right btn btn-primary list-subject-choosen" >Danh sách môn đã chọn( Số lượng đã chọn : <span class="count">0</span>)</a>
+                </div>
+                <div class="col-4 mb-3 mt-3" th:each="subject : ${subjectsByTenHocPhanDistinct}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${subject.tenHocPhan}">Name</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Information</h6>
+                            <p class="card-text">
+                            <nav class="nav flex-column">
+                                <a class="nav-link" href="#">
+                                    Viện : <span th:text="${subject.vien}">Viện</span>
+                                </a>
+                                <a class="nav-link active" href="#">
+                                    Mã Học Phần : <span th:text="${subject.maHocPhan}">Mã học phần</span>
+                                </a>
+                                <a class="nav-link" href="#">Loại Lớp : <span th:text="${subject.loaiLop}"></span>
+                                </a>
+
+                            </nav>
+                            </p>
+                            <button class="btn btn-primary add-subject" type="submit">Add</button>
+                            <button class="btn btn-primary delete-subject" type="submit" disabled>Delete</button>
+
+                            <a class="btn btn-primary" href="#" role="button" th:href="@{/api/v1/list-subject-by-tenHocPhan/details/(tenHocPhan=${subject.tenHocPhan})}">Details Subject</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <button class="button-add" th:attr="data-index = ${state.index + 1}">ADD</button>
+        <!-- end list-subject -->
+
     </div>
-</th:block>
-<button class="lenLich">Create Lich</button>
+</main>
+
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

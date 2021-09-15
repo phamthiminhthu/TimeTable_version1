@@ -2,6 +2,7 @@ package com.it.phamthiminhthu.timetable.services;
 
 import com.it.phamthiminhthu.timetable.entities.NodeAllPath;
 import com.it.phamthiminhthu.timetable.entities.Subject;
+import com.it.phamthiminhthu.timetable.entities.SubjectCommon;
 import com.it.phamthiminhthu.timetable.repository.SubjectRepository;
 import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,26 @@ public class SubjectService {
         return subjectRepository.findListTenHocPhanDistinct();
     }
 
+    public List<SubjectCommon> getInformationCommon() {
+        List<String> subject = getListSubjectByTenHocPhanDistinct();
+        List<SubjectCommon> list = new ArrayList<>();
+        for (int i = 0; i < subject.size(); i++) {
+            List<Subject> subjects = getListSubjectByTenHocPhan(subject.get(i));
+            list.add(new SubjectCommon(subject.get(i), subjects.get(0).getVien(), subjects.get(0).getMaHp(), subjects.get(0).getLoaiLop()));
+        }
+        return list;
+    }
+
+    public List<SubjectCommon> getInformationOfSubjectChoosen(List<String> subject){
+        subject = parseList(subject);
+        List<SubjectCommon> list = new ArrayList<>();
+        for(int i = 0; i < subject.size(); i++){
+            List<Subject> subjects = getListSubjectByTenHocPhan(subject.get(i));
+            list.add(new SubjectCommon(subject.get(i), subjects.get(0).getVien(), subjects.get(0).getMaHp(), subjects.get(0).getLoaiLop()));
+        }
+        return list;
+    }
+
     public List<Subject> getListSubjectByMaLop(int maLop) {
         return subjectRepository.findListSubjectByMaLop(maLop);
     }
@@ -44,7 +65,7 @@ public class SubjectService {
         Map<String, Integer> mapSubject = new HashMap<>();
         for (int i = 0; i < subjects.size(); i++) {
             List<Subject> list = new ArrayList<>();
-            list =listSubjectDistinct(subjects.get(i));
+            list = listSubjectDistinct(subjects.get(i));
             List<Integer> listMaLop = new ArrayList<>();
             for (int j = 0; j < list.size(); j++) {
                 listMaLop.add(list.get(j).getMaLop());
@@ -89,7 +110,7 @@ public class SubjectService {
             int k = Integer.parseInt(time2[1].trim());
             if (j < h || k < i) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
 
@@ -196,7 +217,6 @@ public class SubjectService {
     // ham chinh tra ve tat ca tkb -> dung dfs
     public List<List<Subject>> createTimeTable(List<String> subjects) {
         List<List<Subject>> result = new ArrayList<>();
-        subjects = parseList(subjects);
         subjects = sortListBySoLuongMaLop(subjects);
         if (subjects.size() == 1) {
             List<Subject> list = new ArrayList<>();
@@ -245,8 +265,6 @@ public class SubjectService {
         return result;
 
     }
-
-
 
 
 }
