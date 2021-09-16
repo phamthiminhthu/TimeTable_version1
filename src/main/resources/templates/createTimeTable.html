@@ -46,7 +46,6 @@
                             <th scope="col">Mã HP</th>
                             <th scope="col">Loại Lớp</th>
                             <th scope="col">Hành động</th>
-
                         </tr>
                         </thead>
                         <tbody>
@@ -60,16 +59,13 @@
                                 </button>
                             </td>
                         </tr>
-                       <tr>
-                           <span class="total" th:text="${#lists.size(resultSubject)}"></span>
-                       </tr>
-
+                        <tr>
+                            <span class="total" th:text="${#lists.size(resultSubject)}"></span>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
-
         </div>
         <!-- end list-subject-choose -->
         <!-- create timetable -->
@@ -106,9 +102,9 @@
                                             <th scope="col"></th>
                                         </tr>
                                         </thead>
-                                        <tbody >
+                                        <tbody>
                                         <tr th:each=" i: ${#numbers.sequence(2, 6)}">
-                                            <th scope="row" th:text="${i}" ></th>
+                                            <th scope="row" th:text="${i}"></th>
                                             <th:block th:each="time : ${timetable}">
                                                 <td th:if="${time.thu} == ${i}">
                                                     <span th:text="${time.tenHocPhan}"></span>
@@ -118,12 +114,11 @@
                                                     <span th:text="'Thời gian : ' + ${time.thoiGian}"></span>
                                                     <br>
                                                     <span th:text="'Số buổi : ' + ${time.buoi}"></span>
+                                                    <br>
+                                                    <span th:text="'Thu : ' + ${time.thu}"></span>
                                                 </td>
-
                                             </th:block>
-
                                         </tr>
-
                                         </tbody>
                                     </table>
                                     <button type="button" class="btn btn-primary export">Export</button>
@@ -145,7 +140,7 @@
                                 <th scope="col">Chọn lịch</th>
                             </tr>
                             </thead>
-                            <tbody >
+                            <tbody>
                             <tr th:each="entry, itemIndex : ${myTimeTable}">
                                 <th scope="row" th:text="${itemIndex.index + 1}">1</th>
                                 <td th:text="${entry.key} "></td>
@@ -160,22 +155,16 @@
                                                      ${itemSub.maLopKem} + ' - Thứ : ' + ${itemSub.thu} + ' - Thời gian: '
                                                      + ${itemSub.thoiGian}"></span>
                                                 </option>
-
                                             </select>
                                         </div>
                                     </form>
                                 </td>
-
                             </tr>
-
-
                             </tbody>
-
                         </table>
                         <button type="submit" class="text-center btn btn-primary btnMyTimeTable">Create TimeTable
                         </button>
-
-
+<!--  thoi khoa bieu-->
                         <div id="thoiKhoaBieu" class="d-none">
                             <h3>Thời khoá biểu của bạn</h3>
 
@@ -194,6 +183,7 @@
                             <button type="button" class="btn btn-primary export">Export</button>
 
                         </div>
+<!-- end thoi khoa bieu-->
 
                     </div>
 
@@ -219,14 +209,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 <script th:src="@{/js/creatTimeTable.js}"></script>
 <script>
-    $('.export').click(function (){
+    $('.export').click(function () {
         html2canvas($(this).siblings('.timeTableCapture'), {
             onrendered: function (canvas) {
                 var url = canvas.toDataURL();
-
                 var triggerDownload = $("<a>").attr("href", url).attr("download", "abc.jpeg").appendTo("body");
                 triggerDownload[0].click();
                 triggerDownload.remove();

@@ -12,9 +12,7 @@ $(document).ready(function () {
                     location.href = "http://localhost:9000/api/v1/list-subject-by-tenHocPhan/show-list-subject-choosen";
                 },
                 error: function (xhr) {
-
                 }
-
             })
         })
     });
@@ -81,11 +79,7 @@ $(document).ready(function () {
 
         });
      $("#thoiKhoaBieu").removeClass('d-none');
-
      paints = [];
-
-
-
     });
 
 

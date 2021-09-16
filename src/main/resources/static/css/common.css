@@ -1,0 +1,37 @@
+/* css headerheader*/
+
+a {
+    font-family: emoji;
+}
+
+header.theme {
+    font-size: 23px;
+    font-family: emoji;
+}
+
+main .theme {
+    font-size: 50px;
+    font-family: CURSIVE;
+}
+
+.nav-item a {
+    font-size: 18px;
+}
+
+.card button {
+    font-size: 15px;
+    font-family: emoji;
+}
+
+.card .details {
+    font-size: 15px;
+    font-family: emoji;
+}
+
+
+/* css footer */
+
+footer div {
+    font-size: 20px;
+    font-family: emoji;
+}

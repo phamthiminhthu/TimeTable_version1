@@ -166,7 +166,7 @@ public class SubjectService {
     //check thoi gian 2 lop hoc có bị trùng hay gì không
     public boolean checkTimeTwoSubjects(Subject subject1, Subject subject2) {
         if (countThuTrongTuanHocSubject(subject1).size() == 1 && countThuTrongTuanHocSubject(subject2).size() == 1) {
-            checkTimeTwoSubjects1(subject1, subject2);
+           return checkTimeTwoSubjects1(subject1, subject2);
 
         } else {
             List<Subject> list1 = countThuTrongTuanHocSubject(subject1);

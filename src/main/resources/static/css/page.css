@@ -1,0 +1,36 @@
+/* header css */
+
+
+/* css .list-subject */
+
+.list-subject .navbar {
+    padding: 0px;
+}
+
+.list-subject .form-inline {
+    position: relative;
+}
+
+.list-subject .form-inline input {
+    width: 270px;
+}
+
+.list-subject .form-inline button {
+    position: absolute;
+    right: 0;
+}
+
+.list-subject .list-subject-choosen {
+    font-family: emoji;
+    font-size: 18px;
+}
+
+.list-subject .card .card-body .nav a {
+    font-family: emoji;
+    color: black !important;
+    font-size: 18px;
+}
+
+.list-subject .card .card-body .nav a span {
+    color: brown !important;
+}

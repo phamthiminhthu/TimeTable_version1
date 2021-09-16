@@ -27,6 +27,12 @@ public class SubjectController {
         this.subjectService = subjectService;
     }
 
+    //show tat ca cac lich
+    @GetMapping(value = "/all-lich-hoc")
+    public String showAllLichHoc(Model model){
+        model.addAttribute("listLichHoc", subjectService.getListSubject());
+        return "page";
+    }
     //show toan bo thong tin cua 1 list danh sach
     @GetMapping(value = "/list-subject-by-tenHocPhan")
     public String showListByTenHocPhanDistinct(Model model) {
