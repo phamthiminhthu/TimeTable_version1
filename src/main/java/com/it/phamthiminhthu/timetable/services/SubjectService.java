@@ -318,5 +318,11 @@ public class SubjectService {
         return list;
     }
 
+    //sap xep 1 tkb
+    public List<Subject> sapXepTKB1(List<Subject> subjects){
+        Collections.sort(subjects, new SortByDateTime());
+        return subjects;
+    }
+
 
 }

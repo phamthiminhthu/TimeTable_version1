@@ -21,7 +21,6 @@ import java.util.Map;
 @RequestMapping("/api/v1/")
 public class SubjectController {
     private SubjectService subjectService;
-    public static List<Subject> listCreated = new ArrayList<>();
     public static List<SubjectCommon> result = new ArrayList<>();
 
 
@@ -103,8 +102,7 @@ public class SubjectController {
     //tạo thời khoá biểu cua ban
     @GetMapping(value = "/list-subject-by-tenHocPhan/show-list-subject-choosen", params = {"listId"})
     public ResponseEntity<List<Subject>> paintTimeTable(@RequestParam(name = "listId") List<String> listId, Model model) {
-        listCreated = subjectService.myCreateTimeTable(listId);
-        return new ResponseEntity<List<Subject>>(listCreated, HttpStatus.OK);
+        return new ResponseEntity<List<Subject>>(subjectService.sapXepTKB1(subjectService.myCreateTimeTable(listId)), HttpStatus.OK);
     }
 
 

@@ -26,6 +26,7 @@ $(document).ready(function () {
             url: "http://localhost:9000/api/v1/list-subject-by-tenHocPhan/show-list-subject-choosen",
             type: 'get',
             success: function (response) {
+
             },
             error: function (xhr) {
 
@@ -46,7 +47,7 @@ $(document).ready(function () {
             listIdSub[i] = $("#id" + i).children('option:selected').val();
             ++i;
         }
-        var x = [];
+        var paints = [];
         $.ajax({
             url:"http://localhost:9000/api/v1/list-subject-by-tenHocPhan/show-list-subject-choosen",
             type:'get',
@@ -54,11 +55,27 @@ $(document).ready(function () {
             dataType: "json",
             success:function (response){
 
+                for(var thu = 2; thu < 7; thu++){
+                    paints += '<tr class="minh thu"><th scope="row">' + thu + '</th>';
+                    for(var index = 0; index < response.length; index++){
+                        if(response[index].thu == thu){
+                            paints += '<td><span>' + response[index].tenHocPhan + '</span></br>';
+                            paints += '<span> Mã học phần : ' + response[index].maHp + '</span></br>';
+                            paints += '<span> Thời gian: ' + response[index].thoiGian + '</span></br>';
+                            paints += '<span> Buổi : ' + response[index].buoi + '</span></td>';
+                        }
+                    }
+                    paints += '</tr>';
+
+                }
+                $('.time-table-created').append(paints);
+
             },
             error: function (xhr){
 
             }
         });
+     $("#thoiKhoaBieu").removeClass('d-none');
 
 
 
