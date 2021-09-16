@@ -54,6 +54,7 @@ $(document).ready(function () {
             data: {listId: JSON.stringify(listIdSub)},
             dataType: "json",
             success:function (response){
+               console.log(response.length);
                if($('.time-table-created').children().hasClass('createdTKB')){
                    $('.time-table-created').children().remove('tr');
                }
@@ -75,7 +76,7 @@ $(document).ready(function () {
 
             },
             error: function (xhr){
-
+                console.log("ahihi")
             }
 
         });

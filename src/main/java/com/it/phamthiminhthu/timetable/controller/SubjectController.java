@@ -4,13 +4,11 @@ import com.it.phamthiminhthu.timetable.entities.Subject;
 import com.it.phamthiminhthu.timetable.entities.SubjectCommon;
 import com.it.phamthiminhthu.timetable.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,23 +83,19 @@ public class SubjectController {
         for (int i = 0; i < result.size(); i++) {
             list.add(result.get(i).getTenHocPhan());
         }
-
         model.addAttribute("timetableAll",subjectService.sapXepTKB(subjectService.createTimeTable(list)));
-
         Map<String, List<Subject>> listSubjectCreated = new HashMap<>();
         for (int i = 0; i < list.size(); i++) {
             listSubjectCreated.put(list.get(i), subjectService.getListSubjectByTenHocPhan(list.get(i)));
         }
         model.addAttribute("myTimeTable", listSubjectCreated);
-
-
         return "createTimeTable";
     }
-
 
     //tạo thời khoá biểu cua ban
     @GetMapping(value = "/list-subject-by-tenHocPhan/show-list-subject-choosen", params = {"listId"})
     public ResponseEntity<List<Subject>> paintTimeTable(@RequestParam(name = "listId") List<String> listId, Model model) {
+        if(subjectService.myCreateTimeTable(listId) == null) return new ResponseEntity<>(null, HttpStatus.OK);
         return new ResponseEntity<List<Subject>>(subjectService.sapXepTKB1(subjectService.myCreateTimeTable(listId)), HttpStatus.OK);
     }
 

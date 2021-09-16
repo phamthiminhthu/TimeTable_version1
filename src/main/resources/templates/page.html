@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>
@@ -10,24 +10,7 @@
     <title>Index Page</title>
 </head>
 <body>
-<!--<h1> Minh thu</h1>-->
-<!--<th:block th:each="subject, state : ${subjectsByTenHocPhanDistinct}">-->
-<!--    <div>-->
-<!--        <div class="dropdown show">-->
-<!--            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"-->
-<!--               aria-haspopup="true" aria-expanded="false" th:text="${subject}" th:attr="data-index = ${state.index + 1}">-->
-<!--                Name-->
-<!--            </a>-->
-
-<!--            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--        <button class="button-add" th:attr="data-index = ${state.index + 1}">ADD</button>-->
-<!--    </div>-->
-<!--</th:block>-->
-<!--<button class="lenLich">Create Lich</button>-->
-
+<header></header>
 <main class="mt-3">
     <!-- Button trigger modal -->
 
@@ -46,7 +29,7 @@
                     </nav>
                 </div>
                 <div class="col-6">
-                    <a class="float-right btn btn-primary list-subject-choosen" >Danh sách môn đã chọn( Số lượng đã chọn : <span class="count">0</span>)</a>
+                    <a class="float-right btn btn-primary list-subject-choosen" >Danh sách môn đã chọn( Số lượng đã chọn : <span class="count" >0</span>)</a>
                 </div>
 
                 <div class="col-4 mb-3 mt-3" th:each="subject : ${subjectsByTenHocPhanDistinct}">

@@ -56,23 +56,11 @@ public class SubjectService {
         return list;
     }
 
-    public List<Subject> getListSubjectByMaLop(int maLop) {
-        return subjectRepository.findListSubjectByMaLop(maLop);
-    }
-
-    public Subject findSubjectById(int id) {
-        return subjectRepository.findByIdSubject(id);
-    }
-
-    public List<Subject> myCreateTimeTable(List<String> listId) {
-        List<Integer> newListId = parseIntId(listId);
-        List<Subject> list = new ArrayList<>();
-        for (int i = 0; i < newListId.size(); i++) {
-            list.add(findSubjectById(newListId.get(i)));
-        }
+    public List<Subject> findSubjectById(int id) {
+        Subject subject = subjectRepository.findByIdSubject(id);
+        List<Subject> list = subjectRepository.findByMaLop(subject.getMaLop());
         return list;
     }
-
     public List<Integer> parseIntId(List<String> id) {
         id = parseList(id);
         List<Integer> list = new ArrayList<>();
@@ -82,21 +70,41 @@ public class SubjectService {
         return list;
     }
 
+
+    public List<Subject> myCreateTimeTable(List<String> listId) {
+        List<Integer> newListId = parseIntId(listId);
+        List<Subject> list = new ArrayList<>();
+        for (int i = 0; i < newListId.size(); i++) {
+            list.addAll(findSubjectById(newListId.get(i)));
+        }
+
+        if (list.size() == 1) return list;
+        for (int i = 0; i < list.size() - 1; i++) {
+            for (int j = i + 1; j < list.size(); j++) {
+                if (!checkTimeTwoSubjects1(list.get(i), list.get(j))) {
+                    return null;
+                }
+            }
+        }
+        return list;
+    }
+
+
     //tifm kieems
 
-    public List<SubjectCommon> searchByName(String name){
+    public List<SubjectCommon> searchByName(String name) {
         List<Subject> subjects = subjectRepository.findByNameSubject(name);
         List<Subject> removeSub = new ArrayList<>();
-        for(int i = 0; i < subjects.size() - 1; i++){
-            for(int j = i + 1; j < subjects.size(); j++){
-                if(subjects.get(i).getTenHocPhan().equals(subjects.get(j).getTenHocPhan())){
+        for (int i = 0; i < subjects.size() - 1; i++) {
+            for (int j = i + 1; j < subjects.size(); j++) {
+                if (subjects.get(i).getTenHocPhan().equals(subjects.get(j).getTenHocPhan())) {
                     removeSub.add(subjects.get(j));
                 }
             }
         }
         subjects.removeAll(removeSub);
         List<SubjectCommon> subjectCommons = new ArrayList<>();
-        for(int i = 0 ; i < subjects.size(); i++){
+        for (int i = 0; i < subjects.size(); i++) {
             subjectCommons.add(new SubjectCommon(subjects.get(i).getTenHocPhan(), subjects.get(i).getVien(),
                     subjects.get(i).getMaHp(), subjects.get(i).getLoaiLop()));
         }
@@ -139,23 +147,26 @@ public class SubjectService {
         }
         return result;
     }
+    public boolean checkTimeTwoSubjects1(Subject subject1, Subject subject2){
+        if (subject1.getThu() != subject2.getThu()) return true;
+        String[] time1 = subject1.getThoiGian().split("-");
+        String[] time2 = subject2.getThoiGian().split("-");
+
+        int i = Integer.parseInt(time1[0].trim());
+        int j = Integer.parseInt(time1[1].trim());
+        int h = Integer.parseInt(time2[0].trim());
+        int k = Integer.parseInt(time2[1].trim());
+        if (j < h || k < i) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //check thoi gian 2 lop hoc có bị trùng hay gì không
     public boolean checkTimeTwoSubjects(Subject subject1, Subject subject2) {
         if (countThuTrongTuanHocSubject(subject1).size() == 1 && countThuTrongTuanHocSubject(subject2).size() == 1) {
-            if (subject1.getThu() != subject2.getThu()) return true;
-            String[] time1 = subject1.getThoiGian().split("-");
-            String[] time2 = subject2.getThoiGian().split("-");
-
-            int i = Integer.parseInt(time1[0].trim());
-            int j = Integer.parseInt(time1[1].trim());
-            int h = Integer.parseInt(time2[0].trim());
-            int k = Integer.parseInt(time2[1].trim());
-            if (j < h || k < i) {
-                return true;
-            } else {
-                return false;
-            }
+            checkTimeTwoSubjects1(subject1, subject2);
 
         } else {
             List<Subject> list1 = countThuTrongTuanHocSubject(subject1);
@@ -261,7 +272,7 @@ public class SubjectService {
     public List<List<Subject>> createTimeTable(List<String> subjects) {
         List<List<Subject>> result = new ArrayList<>();
         subjects = sortListBySoLuongMaLop(subjects);
-        if(subjects.size() == 0) return null;
+        if (subjects.size() == 0) return null;
         if (subjects.size() == 1) {
             List<Subject> list = new ArrayList<>();
             list = listSubjectDistinct(subjects.get(0));
@@ -311,15 +322,15 @@ public class SubjectService {
     }
 
     //sap xep lai thoi gian cua 1 thoi khoa bieu
-    public List<List<Subject>> sapXepTKB(List<List<Subject>> list){
-        for(int i = 0; i < list.size(); i++){
+    public List<List<Subject>> sapXepTKB(List<List<Subject>> list) {
+        for (int i = 0; i < list.size(); i++) {
             Collections.sort(list.get(i), new SortByDateTime());
         }
         return list;
     }
 
     //sap xep 1 tkb
-    public List<Subject> sapXepTKB1(List<Subject> subjects){
+    public List<Subject> sapXepTKB1(List<Subject> subjects) {
         Collections.sort(subjects, new SortByDateTime());
         return subjects;
     }

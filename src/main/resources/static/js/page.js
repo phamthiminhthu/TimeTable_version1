@@ -1,13 +1,17 @@
+var listSubject = [];
+var count = 0;
+const key = "number";
 $(document).ready(function () {
-    var listSubject = [];
-    var count = 0;
+
     $('.add-subject').click(function () {
         var nameSubject = $(this).siblings('.card-title').text().trim();
         listSubject.push(nameSubject);
         ++count;
+        localStorage.setItem(key,count);
         $('.count').html(count);
         $(this).attr('disabled', 'disabled');
         $(this).siblings('.delete-subject').removeAttr("disabled");
+
     });
     $('.delete-subject').click(function () {
         var nameSubjectDelete = $(this).siblings('.card-title').text().trim();
@@ -17,11 +21,13 @@ $(document).ready(function () {
             }
         }
         --count;
+
         $(this).siblings('.add-subject').removeAttr("disabled");
         $(this).attr("disabled", "disabled");
+        localStorage.setItem(key,count);
         $('.count').html(count);
     });
-
+    $('.count').html(localStorage.getItem(key));
     $('.list-subject-choosen').click(function () {
         if(count > 0) {
             $.ajax({
@@ -31,6 +37,7 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (response) {
                     location.href = "http://localhost:9000/api/v1/list-subject-by-tenHocPhan/show-list-subject-choosen";
+
                 }, error: function (xhr) {
 
                 }
