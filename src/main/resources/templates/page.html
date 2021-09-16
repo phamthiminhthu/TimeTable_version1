@@ -3,7 +3,9 @@
       xmlns:th="http://thymeleaf.org">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+        integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+        crossorigin="anonymous"></script>
 
 <head>
     <meta charset="UTF-8"/>
@@ -22,17 +24,19 @@
             <div class="row">
                 <div class="col-6">
                     <nav class="navbar navbar-light bg-light">
-                        <form class="form-inline" th:method="post" th:action="@{/api/v1/list-subject-by-tenHocPhan}" >
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" th:name="content">
+                        <form class="form-inline" th:method="post" th:action="@{/api/v1/list-subject-by-tenHocPhan}">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                                   th:name="content">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </nav>
                 </div>
                 <div class="col-6">
-                    <a class="float-right btn btn-primary list-subject-choosen" >Danh sách môn đã chọn( Số lượng đã chọn : <span class="count" >0</span>)</a>
+                    <a class="float-right btn btn-primary list-subject-choosen">Danh sách môn đã chọn( Số lượng đã chọn
+                        : <span class="count">0</span>)</a>
                 </div>
 
-                <div class="col-4 mb-3 mt-3" th:each="subject : ${subjectsByTenHocPhanDistinct}">
+                <div class="col-4 mb-3 mt-3" th:each="subject,index : ${subjectsByTenHocPhanDistinct}">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${subject.tenHocPhan}">Name</h5>
@@ -42,7 +46,7 @@
                                 <a class="nav-link" href="#">
                                     Viện : <span th:text="${subject.vien}">Viện</span>
                                 </a>
-                                <a class="nav-link active" href="#">
+                                <a class="nav-link active ma-hoc-phan" href="#">
                                     Mã Học Phần : <span th:text="${subject.maHocPhan}">Mã học phần</span>
                                 </a>
                                 <a class="nav-link" href="#">Loại Lớp : <span th:text="${subject.loaiLop}"></span>
@@ -50,10 +54,16 @@
 
                             </nav>
                             </p>
-                            <button class="btn btn-primary add-subject" type="submit">Add</button>
-                            <button class="btn btn-primary delete-subject" type="submit" disabled>Delete</button>
+                            <button class="btn btn-primary add-subject" type="submit"
+                                    th:id="'add' + ${subject.maHocPhan}">Add
+                            </button>
+                            <button class="btn btn-primary delete-subject" type="submit" disabled
+                                    th:id="'delete' + ${subject.maHocPhan}">Delete
+                            </button>
 
-                            <a class="btn btn-primary" href="#" role="button" th:href="@{/api/v1/list-subject-by-tenHocPhan/details/(tenHocPhan=${subject.tenHocPhan})}">Details Subject</a>
+                            <a class="btn btn-primary" href="#" role="button"
+                               th:href="@{/api/v1/list-subject-by-tenHocPhan/details/(tenHocPhan=${subject.tenHocPhan})}">Details
+                                Subject</a>
                         </div>
                     </div>
                 </div>
