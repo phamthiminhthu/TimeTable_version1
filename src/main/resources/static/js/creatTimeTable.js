@@ -54,14 +54,17 @@ $(document).ready(function () {
             data: {listId: JSON.stringify(listIdSub)},
             dataType: "json",
             success:function (response){
-
+               if($('.time-table-created').children().hasClass('createdTKB')){
+                   $('.time-table-created').children().remove('tr');
+               }
                 for(var thu = 2; thu < 7; thu++){
-                    paints += '<tr class="minh thu"><th scope="row">' + thu + '</th>';
+                    paints += '<tr class="createdTKB"><th scope="row">' + thu + '</th>';
                     for(var index = 0; index < response.length; index++){
                         if(response[index].thu == thu){
                             paints += '<td><span>' + response[index].tenHocPhan + '</span></br>';
                             paints += '<span> Mã học phần : ' + response[index].maHp + '</span></br>';
                             paints += '<span> Thời gian: ' + response[index].thoiGian + '</span></br>';
+                            paints += '<span> Phòng: ' + response[index].phong + '</span></br>';
                             paints += '<span> Buổi : ' + response[index].buoi + '</span></td>';
                         }
                     }
@@ -74,8 +77,11 @@ $(document).ready(function () {
             error: function (xhr){
 
             }
+
         });
      $("#thoiKhoaBieu").removeClass('d-none');
+
+     paints = [];
 
 
 
