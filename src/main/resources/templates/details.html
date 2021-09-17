@@ -3,32 +3,59 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/details.css}">
 <head>
     <meta charset="UTF-8"/>
     <title>Index Page</title>
 </head>
 <body>
-<header></header>
+<header>
+    <!-- Image and text -->
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <img src=" https://media-cdn.laodong.vn/storage/newsportal/Uploaded/nguyenhuyen/2017_07_30/bk2017_LODO.jpg" alt="" class="img-fluid" style="width: 120px;">
+        <a class="navbar-brand mx-3 theme" href="#">SCHEDULE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Schedule 2021<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">List Subject</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+</header>
 <main>
     <div class="container">
         <!-- details-subject -->
 
         <div class="details-subject">
-            <h3 class="text-center" th:text="${subjectDetail.tenHocPhan}">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#" th:text="${subjectDetail.vien}">Viện</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" th:text="${subjectDetail.maHocPhan}">Mã Học Phần</a>
-                    </li>
-                    <li class="nav-item" th:text="${subjectDetail.loaiLop}">
-                        <a class="nav-link" href="#">Loại Lớp</a>
-                    </li>
-
-                </ul>
+            <h3 class="text-center theme" th:text="${subjectDetail.tenHocPhan}">
+                Lập trình cấu trúc
             </h3>
-            <div class="row">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" th:text="${subjectDetail.vien} + ' - '">Viện</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:text="${subjectDetail.maHocPhan}+' - '">Mã Học Phần</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" th:text="${subjectDetail.loaiLop}" href="#">Loại Lớp</a>
+                </li>
+
+            </ul>
+            <div class="row mt-3">
                 <div class="col-12">
                     <table class="table table-bordered">
                         <thead>
@@ -72,7 +99,11 @@
 
 
 </main>
-<footer></footer>
+<footer class="mt-5 mb-3">
+    <div class="text-center">
+        Create by Phạm Thị Minh Thư
+    </div>
+</footer>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
