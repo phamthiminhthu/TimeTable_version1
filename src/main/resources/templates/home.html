@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/home.css}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Index Page</title>
+</head>
+<body>
+
+<header>
+    <!-- Image and text -->
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <img src=" https://media-cdn.laodong.vn/storage/newsportal/Uploaded/nguyenhuyen/2017_07_30/bk2017_LODO.jpg" alt="" class="img-fluid">
+        <div class="list-item-home">
+
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/api/v1/home}">SCHEDULE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/api/v1/all-lich-hoc}">SCHEDULE 20211</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/api/v1/list-subject-by-tenHocPhan}">LIST SUBJECT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ABOUT</a>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+</header>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/page.js}"></script>
+</body>
+</html>

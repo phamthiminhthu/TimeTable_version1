@@ -89,6 +89,10 @@ public class SubjectService {
         return list;
     }
 
+    public List<Subject> searchByContentInput(String name){
+        return subjectRepository.findByNameSubject(name);
+    }
+
 
     //tifm kieems
 

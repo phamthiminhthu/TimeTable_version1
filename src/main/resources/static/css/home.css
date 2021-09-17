@@ -1,0 +1,29 @@
+img {
+    width: 100%;
+}
+
+.list-item-home ul {
+    position: absolute;
+    top: 60px;
+    right: 140px;
+}
+
+.list-item-home ul .active {
+    font-size: 50px;
+    color: red !important;
+    border: 1px solid honeydew;
+    border-radius: 30%;
+    background-color: white;
+    margin-bottom: 20px;
+    font-family: emoji;
+}
+
+.list-item-home ul li a {
+    font-family: emoji;
+    color: brown !important;
+    font-size: 20px;
+}
+
+.list-item-home ul li a {
+    background-color: honeydew;
+}

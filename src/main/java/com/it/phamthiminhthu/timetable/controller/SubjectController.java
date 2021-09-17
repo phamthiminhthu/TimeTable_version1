@@ -26,13 +26,24 @@ public class SubjectController {
     public SubjectController(SubjectService subjectService) {
         this.subjectService = subjectService;
     }
-
+    @GetMapping("/home")
+    public String showHome(){
+        return "home";
+    }
     //show tat ca cac lich
     @GetMapping(value = "/all-lich-hoc")
     public String showAllLichHoc(Model model){
         model.addAttribute("listLichHoc", subjectService.getListSubject());
         return "listSchedule";
     }
+
+    //tim theo ten mon hoc
+    @PostMapping(value = "/all-lich-hoc", params = {"contentSub"})
+    public String searchInByList(@RequestParam(name = "contentSub") String contentSub, Model model){
+        model.addAttribute("listLichHoc", subjectService.searchByContentInput(contentSub));
+        return "listSchedule";
+    }
+
     //show toan bo thong tin cua 1 list danh sach
     @GetMapping(value = "/list-subject-by-tenHocPhan")
     public String showListByTenHocPhanDistinct(Model model) {

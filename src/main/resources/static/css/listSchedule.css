@@ -1,0 +1,15 @@
+/*css form*/
+
+.listSchedule .form-inline {
+    position: relative;
+}
+
+.listSchedule .form-inline input {
+    width: 300px;
+    padding: 8px;
+}
+
+.listSchedule .form-inline button {
+    position: absolute;
+    right: 8px;
+}
