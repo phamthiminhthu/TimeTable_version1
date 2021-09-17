@@ -36,7 +36,7 @@ $(document).ready(function () {
             listMaHocPhan = JSON.parse(listMaHocPhan);
         }
         var nameSubjectDelete = $(this).siblings('.card-title').text().trim();
-        var maHocPhan = $(this).siblings('.card-text').children('nav').children('.ma-hoc-phan')
+        var maHocPhan = $(this).siblings('.nav').children('.ma-hoc-phan')
             .children('span').text().trim();
         for (var i = 0; i < listSubject.length; i++) {
             if (listSubject[i].localeCompare(nameSubjectDelete) == 0) {

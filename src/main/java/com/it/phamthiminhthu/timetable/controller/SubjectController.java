@@ -31,7 +31,7 @@ public class SubjectController {
     @GetMapping(value = "/all-lich-hoc")
     public String showAllLichHoc(Model model){
         model.addAttribute("listLichHoc", subjectService.getListSubject());
-        return "page";
+        return "listSchedule";
     }
     //show toan bo thong tin cua 1 list danh sach
     @GetMapping(value = "/list-subject-by-tenHocPhan")
