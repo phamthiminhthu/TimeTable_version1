@@ -1,0 +1,26 @@
+.btn-created {
+    font-size: 16px;
+    font-family: inherit;
+}
+
+#accordion .card-header {
+    padding: 2px;
+}
+
+#accordion .card h5 button {
+    font-size: 20px !important;
+    color: red !important;
+}
+
+.export {
+    float: right;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.theme-schedule {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-family: auto;
+    font-size: 30px;
+}

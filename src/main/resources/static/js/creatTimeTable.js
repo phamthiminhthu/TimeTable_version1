@@ -1,9 +1,40 @@
+const key = "number";
+const key1 = "subjects";
+const key2 = "subjectsMaHocPhan";
+var count = localStorage.getItem(key);
+var listSubject = localStorage.getItem(key1);
+var listMaHocPhan = localStorage.getItem(key2);
 $(document).ready(function () {
     $('.delete-subject-inList').click(function () {
         $(this).attr("data-toggle", "modal");
         $(this).attr("data-target", "#exampleModal");
         var subject = $(this).parents().siblings('.nameHp').text().trim();
+        var maHocPhan = $(this).parents().siblings('.ma-hocPhan').text().trim();
+        console.log(maHocPhan);
+        if (checkJson(listSubject)) {
+            listSubject = JSON.parse(listSubject);
+        }
+        if (checkJson(listMaHocPhan)){
+            listMaHocPhan = JSON.parse(listMaHocPhan);
+        }
         $('.node-delete').click(function () {
+            for (var i = 0; i < listSubject.length; i++) {
+                if (listSubject[i].localeCompare(subject) == 0) {
+                    listSubject.splice(i, 1);
+                }
+            }
+
+
+            for (var i = 0; i < listMaHocPhan.length; i++) {
+                console.log(listMaHocPhan[i].localeCompare(maHocPhan));
+                if (listMaHocPhan[i].localeCompare(maHocPhan) == 0) {
+                    listMaHocPhan.splice(i, 1);
+                }
+            }
+            --count;
+            localStorage.setItem(key, count);
+            localStorage.setItem(key2, JSON.stringify(listMaHocPhan));
+            localStorage.setItem(key1, JSON.stringify(listSubject));
             $.ajax({
                 url: "http://localhost:9000/api/v1/list-subject-by-tenHocPhan/show-list-subject-choosen",
                 type: 'get',
@@ -13,8 +44,9 @@ $(document).ready(function () {
                 },
                 error: function (xhr) {
                 }
-            })
-        })
+            });
+        });
+
     });
 
     $('.create-timetable-all').click(function () {
@@ -86,3 +118,11 @@ $(document).ready(function () {
 
 
 });
+function checkJson(x) {
+    try {
+        JSON.parse(x);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}

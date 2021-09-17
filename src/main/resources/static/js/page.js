@@ -4,7 +4,6 @@ var count = 0;
 const key = "number";
 const key1 = "subjects";
 const key2 = "subjectsMaHocPhan";
-sessionStorage.setItem(key, "0");
 $(document).ready(function () {
     $('.add-subject').click(function () {
         var nameSubject = $(this).siblings('.card-title').text().trim();
@@ -18,11 +17,11 @@ $(document).ready(function () {
         }
         listSubject.push(nameSubject);
         listMaHocPhan.push(maHocPhan);
-        sessionStorage.setItem(key2, JSON.stringify(listMaHocPhan));
-        sessionStorage.setItem(key1, JSON.stringify(listSubject));
+        localStorage.setItem(key2, JSON.stringify(listMaHocPhan));
+        localStorage.setItem(key1, JSON.stringify(listSubject));
 
         ++count;
-        sessionStorage.setItem(key, count);
+        localStorage.setItem(key, count);
         $('.count').html(count);
 
         $(this).attr('disabled', 'disabled');
@@ -51,18 +50,18 @@ $(document).ready(function () {
             }
         }
         --count;
-        sessionStorage.setItem(key, count);
+        localStorage.setItem(key, count);
         $('.count').html(count);
 
-        sessionStorage.setItem(key2, JSON.stringify(listMaHocPhan));
-        sessionStorage.setItem(key1, JSON.stringify(listSubject));
+        localStorage.setItem(key2, JSON.stringify(listMaHocPhan));
+        localStorage.setItem(key1, JSON.stringify(listSubject));
 
         $(this).siblings('.add-subject').removeAttr("disabled");
         $(this).attr("disabled", "disabled");
     });
 
     $('.list-subject-choosen').click(function () {
-        listSubject = sessionStorage.getItem(key1);
+        listSubject = localStorage.getItem(key1);
         if (count > 0) {
             $.ajax({
                 url: "http://localhost:9000/api/v1/list-subject-by-tenHocPhan/show-list-subject-choosen",
@@ -79,8 +78,8 @@ $(document).ready(function () {
         }
     })
 
-    $('.count').html(sessionStorage.getItem(key));
-    var subjectChoose = sessionStorage.getItem(key2);
+    $('.count').html(localStorage.getItem(key));
+    var subjectChoose = localStorage.getItem(key2);
     if (subjectChoose) {
         subjectChoose = JSON.parse(subjectChoose);
         for (var i = 0; i < subjectChoose.length; i++) {
@@ -89,9 +88,9 @@ $(document).ready(function () {
             var idDelete = "delete" + subjectChoose[i];
             $("#" + idDelete).removeAttr('disabled');
         }
-        listSubject = sessionStorage.getItem(key1);
-        count = sessionStorage.getItem(key);
-        listMaHocPhan = sessionStorage.getItem(key2);
+        listSubject = localStorage.getItem(key1);
+        count = localStorage.getItem(key);
+        listMaHocPhan = localStorage.getItem(key2);
 
 
     }

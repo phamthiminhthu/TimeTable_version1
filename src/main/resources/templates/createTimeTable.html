@@ -3,15 +3,40 @@
       xmlns:th="http://thymeleaf.org">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/createTimeTable.css}">
 <head>
     <meta charset="UTF-8"/>
     <title>Index Page</title>
 </head>
 <body>
-<header></header>
+<header>
+    <!-- Image and text -->
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <img src=" https://media-cdn.laodong.vn/storage/newsportal/Uploaded/nguyenhuyen/2017_07_30/bk2017_LODO.jpg" alt="" class="img-fluid" style="width: 120px;">
+        <a class="navbar-brand mx-3 theme" href="#">SCHEDULE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Schedule 2021<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">List Subject</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+</header>
 <main>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -35,7 +60,7 @@
 
         <!-- list-subject-choose -->
         <div class="list-subject-choose mt-3">
-            <h3 class="text-center">List subject create timetable</h3>
+            <h3 class="text-center theme"> Create Timetable</h3>
             <div class="row">
                 <div class="col-12">
                     <table class="table table-bordered">
@@ -51,9 +76,9 @@
                         <tbody>
                         <tr th:each="subject, state : ${resultSubject} ">
                             <th scope="row" th:text="${state.index + 1}">1</th>
-                            <td th:text="${subject.tenHocPhan}" class="nameHp"></td>
-                            <td th:text="${subject.maHocPhan}"></td>
-                            <td th:text="${subject.loaiLop}"></td>
+                            <td th:text="${subject.tenHocPhan}" class="nameHp">Lập trình cấu trúc</td>
+                            <td th:text="${subject.maHocPhan}" class="ma-hocPhan">IT4189</td>
+                            <td th:text="${subject.loaiLop}">LT+BT</td>
                             <td>
                                 <button type="button" class="btn btn-danger delete-subject-inList ">DELETE
                                 </button>
@@ -72,10 +97,10 @@
         <div class="create-timetable mt-3">
             <div class="row">
                 <div class="col-12">
-                    <button type="button" class="btn btn-primary text-center create-timetable-all">CREATE ALL
+                    <button type="button" class="btn btn-success text-center create-timetable-all btn-created">CREATE ALL
                         TIMETABLE
                     </button>
-                    <button type="button" class="btn btn-primary text-center " id="myTimetable">CREATE MY TIMETABLE
+                    <button type="button" class="btn btn-info text-center btn-created float-right" id="myTimetable">CREATE MY TIMETABLE
                     </button>
                 </div>
                 <div class="col-12 mt-3">
@@ -85,15 +110,12 @@
                         <div class="card" th:each="timetable, state : ${timetableAll}">
                             <div class="card-header">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" data-toggle="collapse"
-                                            th:data-target="${'#' + state.index}"
-                                            aria-expanded="true" th:aria-controls="${state.index}"
-                                            th:text="'TimeTable ' + ${state.index + 1}">
+                                    <button class="btn btn-link" data-toggle="collapse" th:data-target="${'#' + state.index}" aria-expanded="true" th:aria-controls="${state.index}" th:text="'TimeTable ' + ${state.index + 1}">
+                                        TimeTable 1
                                     </button>
                                 </h5>
                             </div>
-                            <div th:id="${state.index}" class="collapse" aria-labelledby="headingOne"
-                                 data-parent="#accordion">
+                            <div th:id="${state.index}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                 <div class="card-body">
                                     <table class="table table-dark timeTableCapture">
                                         <thead>
@@ -104,24 +126,24 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each=" i: ${#numbers.sequence(2, 6)}">
-                                            <th scope="row" th:text="${i}"></th>
+                                            <th scope="row" th:text="${i}">2</th>
                                             <th:block th:each="time : ${timetable}">
                                                 <td th:if="${time.thu} == ${i}">
-                                                    <span th:text="${time.tenHocPhan}"></span>
+                                                    <span th:text="${time.tenHocPhan}">Lập trình cấu trúc</span>
                                                     <br>
-                                                    <span th:text="'Mã Học Phần : ' + ${time.maHp}"></span>
+                                                    <span th:text="'Mã Học Phần : ' + ${time.maHp}">Mã học phần : IT4124</span>
                                                     <br>
-                                                    <span th:text="'Thời gian : ' + ${time.thoiGian}"></span>
+                                                    <span th:text="'Thời gian : ' + ${time.thoiGian}">Thời gian : 0825-1025</span>
                                                     <br>
-                                                    <span th:text="'Số buổi : ' + ${time.buoi}"></span>
+                                                    <span th:text="'Buổi : ' + ${time.buoi}">Buổi : Sáng</span>
                                                     <br>
-                                                    <span th:text="'Thu : ' + ${time.thu}"></span>
+
                                                 </td>
                                             </th:block>
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn btn-primary export">Export</button>
+                                    <button type="button" class="btn btn-warning btn-sm export">Export</button>
                                 </div>
                             </div>
                         </div>
@@ -131,6 +153,7 @@
                     <!-- end-create-timetable-all -->
 
                     <!-- create-mytimetable -->
+
                     <div class="create-my-timetable d-none">
                         <table class="table">
                             <thead>
@@ -143,17 +166,16 @@
                             <tbody>
                             <tr th:each="entry, itemIndex : ${myTimeTable}">
                                 <th scope="row" th:text="${itemIndex.index + 1}">1</th>
-                                <td th:text="${entry.key} "></td>
+                                <td th:text="${entry.key} ">Lập trình cấu trúc</td>
                                 <td>
                                     <form action="">
                                         <div class="form-group">
-                                            <select class="form-control select-option"
-                                                    th:id="'id' + ${itemIndex.index}">
+                                            <select class="form-control select-option" th:id="'id' + ${itemIndex.index}">
                                                 <option th:each="itemSub : ${entry.value}"
                                                         th:value="${itemSub.id}">
-                                                    <span th:text="'Mã lớp: '+ ${itemSub.maLop} + '- Mã lớp kèm : ' +
-                                                     ${itemSub.maLopKem} + ' - Thứ : ' + ${itemSub.thu} + ' - Thời gian: '
-                                                     + ${itemSub.thoiGian}"></span>
+                                                        <span th:text="'Mã lớp: '+ ${itemSub.maLop} + '- Mã lớp kèm : ' +
+                                                         ${itemSub.maLopKem} + ' - Thứ : ' + ${itemSub.thu} + ' - Thời gian: '
+                                                         + ${itemSub.thoiGian}">Mã lớp : 128564</span>
                                                 </option>
                                             </select>
                                         </div>
@@ -162,11 +184,12 @@
                             </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="text-center btn btn-primary btnMyTimeTable">Create TimeTable
+                        <button type="submit" class="text-center btn btn-primary btnMyTimeTable btn-created">CREATE TIMETABLE
                         </button>
-<!--  thoi khoa bieu-->
+                        <!--  thoi khoa bieu-->
+
                         <div id="thoiKhoaBieu" class="d-none">
-                            <h3>Thời khoá biểu của bạn</h3>
+                            <h3 class="text-center theme-schedule">Thời khoá biểu của bạn</h3>
 
                             <table class="table table-dark timeTableCapture">
                                 <thead>
@@ -180,10 +203,10 @@
 
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-primary export">Export</button>
+                            <button type="button" class="btn btn-warning btn-sm export">Export</button>
 
                         </div>
-<!-- end thoi khoa bieu-->
+                        <!-- end thoi khoa bieu-->
 
                     </div>
 
@@ -197,9 +220,10 @@
     </div>
 
 </main>
-
-<footer>
-
+<footer class="mt-5 mb-3">
+    <div class="text-center">
+        Create by Phạm Thị Minh Thư
+    </div>
 </footer>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

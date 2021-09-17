@@ -28,6 +28,22 @@ main .theme {
     font-family: emoji;
 }
 
+/* css table */
+
+.table tr {
+    text-align: center;
+}
+
+.table tr td {
+    font-family: emoji;
+    font-size: 18px;
+}
+
+.table .delete-subject-inList {
+    font-family: system-ui;
+    font-size: 15px;
+}
+
 
 /* css footer */
 
