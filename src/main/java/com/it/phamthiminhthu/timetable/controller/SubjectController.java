@@ -116,6 +116,12 @@ public class SubjectController {
         return new ResponseEntity<List<Subject>>(subjectService.sapXepTKB1(subjectService.myCreateTimeTable(listId)), HttpStatus.OK);
     }
 
+    //about
+    @GetMapping("/about")
+    public String aboutMe(){
+        return "about";
+    }
+
 
 
 

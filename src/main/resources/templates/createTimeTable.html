@@ -27,7 +27,7 @@
                     <a class="nav-link" th:href="@{/api/v1/list-subject-by-tenHocPhan}">List Subject</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" th:href="@{/api/v1/about}">About</a>
                 </li>
 
             </ul>
@@ -74,6 +74,7 @@
                         </tr>
                         </thead>
                         <tbody>
+
                         <tr th:each="subject, state : ${resultSubject} ">
                             <th scope="row" th:text="${state.index + 1}">1</th>
                             <td th:text="${subject.tenHocPhan}" class="nameHp">Lập trình cấu trúc</td>
